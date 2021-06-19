@@ -1,3 +1,7 @@
+/*
+ *  Update with the latest data
+ */
+
 export const data = {
   uom: {
     weight: "kg",
