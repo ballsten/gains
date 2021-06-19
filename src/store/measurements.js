@@ -18,6 +18,10 @@ export const data = {
     {
       date: new Date("2021-06-19"),
       weight: 89.0
+    },
+    {
+      date: new Date("2021-06-20"),
+      weight: 88.7
     }
   ]
 }
