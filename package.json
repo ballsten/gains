@@ -6,6 +6,7 @@
     "serve": "vite preview"
   },
   "dependencies": {
+    "dexie": "^3.0.3",
     "vue": "^3.0.5"
   },
   "devDependencies": {
