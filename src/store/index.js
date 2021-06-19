@@ -6,7 +6,7 @@ import { data } from './measurements'
 export const db = new Dexie('gains')
 
 db.version(1).stores({
-  measurements: "++id, date, type"
+  measurements: "++id, date, type, [type+date]"
 })
 
 // load latest data
@@ -35,9 +35,19 @@ async function loadNewData() {
   }
 }
 
+/*
+ * Helper functions
+ */
+async function startingWeight() {
+  const record = await db.measurements.where({type: "weight"}).first()
+  return record.unit
+}
+
+
 db.on('ready', loadNewData)
 db.open()
 
 export const store = {
-  db: db
+  db: db,
+  startingWeight
 }
