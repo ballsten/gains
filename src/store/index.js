@@ -5,7 +5,7 @@
 */
 import Dexie from 'dexie'
 
-import { data } from './measurements'
+import { measurements } from './measurements'
 
 // Constants
 const AVERAGE_PERIOD_DAYS = 5
@@ -31,7 +31,7 @@ export class Store extends Dexie {
   async prepareData() {
     const latest = await this.measurements.orderBy('date').last()
     const maxDate = latest ? latest.date : new Date("1981-01-01")
-    const newData = data.measurements.filter(m => m.date > maxDate)
+    const newData = measurements.data.filter(m => m.date > maxDate)
     newData.sort((a, b) => { a.date - b.date })
     for (const x of newData) {
       for (const prop in x) {
@@ -39,7 +39,7 @@ export class Store extends Dexie {
           const id = await this.measurements.put({
             date: x.date,
             type: prop,
-            uom: data.uom[prop],
+            uom: measurements.uom[prop],
             unit: x[prop]
           })
         }

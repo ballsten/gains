@@ -2,14 +2,14 @@
  *  Update with the latest data
  */
 
-export const data = {
+export const measurements = {
   uom: {
     weight: "kg",
     height: "cm",
     neck: "cm",
     waist: "cm",
   },
-  measurements: [
+  data: [
     {
       date: new Date("2021-06-18"),
       weight: 89.6,
