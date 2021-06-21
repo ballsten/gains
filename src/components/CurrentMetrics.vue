@@ -4,7 +4,7 @@
       <p class="card-header-title">Current Metrics</p>
     </div>
     <div class="card-content">
-      <table class="table">
+      <table class="table is-fullwidth">
         <tbody>
           <tr>
             <td>Weight</td>
@@ -34,6 +34,6 @@
 
 <script>
 export default {
-  props: ['weight', 'height', 'bodyFat', 'leanBodyMass', 'bodyMassIndex']
+  props: ["weight", "height", "bodyFat", "leanBodyMass", "bodyMassIndex"],
 };
 </script>
