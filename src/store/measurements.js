@@ -12,6 +12,7 @@ export const measurements = {
   data: [
     {
       date: new Date("2021-06-18"),
+      birthday: new Date("1981-09-21"),
       weight: 89.6,
       height: 181,
       neck: 38.6,

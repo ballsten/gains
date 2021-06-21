@@ -84,4 +84,8 @@ export class Store extends Dexie {
 
     return value
   }
+
+  async getCurrentPlan() {
+    return this.plans.where("status").equals("active").first()
+  }
 }

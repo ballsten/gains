@@ -7,6 +7,10 @@
       <table class="table is-fullwidth">
         <tbody>
           <tr>
+            <td>Age</td>
+            <td>{{ age }}</td>
+          </tr>
+          <tr>
             <td>Weight</td>
             <td>{{ weight }} kg</td>
           </tr>
@@ -34,6 +38,6 @@
 
 <script>
 export default {
-  props: ["weight", "height", "bodyFat", "leanBodyMass", "bodyMassIndex"],
-};
+  props: ["age", "weight", "height", "bodyFat", "leanBodyMass", "bodyMassIndex"],
+}
 </script>
