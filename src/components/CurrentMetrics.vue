@@ -8,15 +8,23 @@
         <tbody>
           <tr>
             <td>Weight</td>
-            <td>{{ currentWeight() }} kg</td>
+            <td>{{ weight }} kg</td>
           </tr>
           <tr>
             <td>Height</td>
-            <td>{{ currentHeight() }} cm</td>
+            <td>{{ height }} cm</td>
           </tr>
           <tr>
             <td>Body Fat</td>
-            <td>24%</td>
+            <td>{{ bodyFat }}%</td>
+          </tr>
+          <tr>
+            <td>Lean Body Mass</td>
+            <td>{{ leanBodyMass }} kg</td>
+          </tr>
+          <tr>
+            <td>BMI</td>
+            <td>{{ bodyMassIndex }}%</td>
           </tr>
         </tbody>
       </table>
@@ -26,13 +34,6 @@
 
 <script>
 export default {
-  methods: {
-    currentWeight() {
-      return parseFloat(this.$store.metrics.currentWeight).toFixed(2);
-    },
-    currentHeight() {
-      return parseFloat(this.$store.metrics.currentHeight).toFixed(0);
-    },
-  },
+  props: ['weight', 'height', 'bodyFat', 'leanBodyMass', 'bodyMassIndex']
 };
 </script>
