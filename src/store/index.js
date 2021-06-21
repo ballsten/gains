@@ -9,7 +9,7 @@ import { measurements } from './measurements'
 import { plans } from './plans'
 
 // Constants
-const AVERAGE_PERIOD_DAYS = 5
+const AVERAGE_PERIOD_DAYS = 3
 
 export class Store extends Dexie {
   constructor() {
@@ -57,14 +57,14 @@ export class Store extends Dexie {
   async measurementAt(date, type, dayRange = 0) {
     let startDate = new Date(date)
     startDate.setDate(startDate.getDate() - dayRange)
+    let endDate = new Date(date)
+    endDate.setDate(endDate.getDate() + 1)
 
     const records = await this.measurements
       .where("[type+date]")
       .between(
         [type, startDate],
-        [type, date],
-        true,
-        true)
+        [type, endDate])
       .toArray()
 
     let sum = records.reduce((a, b) => a + b.unit, 0)

@@ -77,7 +77,7 @@ export default {
 
       this.metrics.weight = parseFloat(
         await this.store.getCurrent("weight")
-      ).toFixed(2);
+      ).toFixed(1);
       this.metrics.height = parseFloat(
         await this.store.getCurrent("height")
       ).toFixed(0);
@@ -96,21 +96,21 @@ export default {
           Math.log10((this.metrics.waist - this.metrics.neck) * 0.393701) -
           70.041 * Math.log10(this.metrics.height * 0.393701) +
           36.76
-      ).toFixed(2);
+      ).toFixed(1);
       this.metrics.leanBodyMass = parseFloat(
         this.metrics.weight * (1 - this.metrics.bodyFat / 100)
-      ).toFixed(2);
+      ).toFixed(1);
       this.metrics.bodyMassIndex = parseFloat(
         (this.metrics.weight /
           ((this.metrics.height * this.metrics.height) / 100)) *
           100
-      ).toFixed(2);
+      ).toFixed(1);
     },
     async calculatePlanMetrics() {
       let currentPlan = await this.store.getCurrentPlan()
 
       this.planMetrics.type = currentPlan.type.charAt(0).toUpperCase() + currentPlan.type.slice(1)
-      this.planMetrics.targetBodyFat = parseFloat(currentPlan.targetBodyFat * 100).toFixed(2)
+      this.planMetrics.targetBodyFat = parseFloat(currentPlan.targetBodyFat * 100).toFixed(0)
       this.planMetrics.exercisePerWeek = currentPlan.exercisePerWeek
 
       this.planMetrics.bmr = parseFloat(370 + (21.6 * this.metrics.leanBodyMass) * 4.184).toFixed(0)
