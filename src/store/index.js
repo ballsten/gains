@@ -6,6 +6,7 @@
 import Dexie from 'dexie'
 
 import { measurements } from './measurements'
+import { plans } from './plans'
 
 // Constants
 const AVERAGE_PERIOD_DAYS = 5
@@ -15,15 +16,15 @@ export class Store extends Dexie {
     super('gains')
 
     this.version(1).stores({
-      measurements: "++id, date, [type+date]"
+      measurements: "++id, date, [type+date]",
+      plans: "startDate, status"
     })
 
     this.on('ready', () => {
       this.measurements = this.table('measurements')
+      this.plans = this.table('plans')
       this.prepareData()
     })
-    //this.open()
-
   }
 
   // load latest data
@@ -45,6 +46,9 @@ export class Store extends Dexie {
         }
       }
     }
+
+    this.plans.clear()
+    this.plans.bulkAdd(plans)
   }
 
   /*
