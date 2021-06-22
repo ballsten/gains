@@ -35,7 +35,7 @@ jobs:
         SOURCE_DIR: 'dist'      # optional: defaults to entire repository
 
     - name: invalidate cloudfront
-      use: chetan/invalidate-cloudfront-action@master
+      uses: chetan/invalidate-cloudfront-action@master
       env:
         DISTRIBUTION: ${{ secrets.AWS_CLOUDFRONT_DISTRIBUTION_ID }}
         PATHS: '/index.html'
