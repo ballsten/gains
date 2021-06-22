@@ -83,9 +83,11 @@ export default {
   },
   async created() {
     this.store = new Store();
-    await this.calculateMetrics();
-    await this.calculatePlanMetrics();
-    await this.calculateNutrition();
+    this.store.on("dataload", async () => {
+      await this.calculateMetrics();
+      await this.calculatePlanMetrics();
+      await this.calculateNutrition();
+    });
   },
   methods: {
     async calculateMetrics() {
@@ -144,14 +146,16 @@ export default {
         this.metrics.leanBodyMass / (1 - this.planMetrics.targetBodyFat / 100)
       ).toFixed(1);
 
-      let estimatedEndDate = new Date()
-      let lossRequired = this.metrics.weight - this.planMetrics.estimatedTargetWeight
-      let daysRequired = lossRequired / (Math.abs(this.planMetrics.changePerWeek) / 7)
-      estimatedEndDate.setDate(estimatedEndDate.getDate() + daysRequired)
+      let estimatedEndDate = new Date();
+      let lossRequired =
+        this.metrics.weight - this.planMetrics.estimatedTargetWeight;
+      let daysRequired =
+        lossRequired / (Math.abs(this.planMetrics.changePerWeek) / 7);
+      estimatedEndDate.setDate(estimatedEndDate.getDate() + daysRequired);
 
-      let dft = new Intl.DateTimeFormat("en-GB")
-      
-      this.planMetrics.estimatedEndDate = dft.format(estimatedEndDate)
+      let dft = new Intl.DateTimeFormat("en-GB");
+
+      this.planMetrics.estimatedEndDate = dft.format(estimatedEndDate);
     },
     async calculateNutrition() {
       this.nutrition.bmr = parseFloat(

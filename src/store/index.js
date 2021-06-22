@@ -15,6 +15,8 @@ export class Store extends Dexie {
   constructor() {
     super('gains')
 
+    this.on.addEventType("dataload")
+
     this.version(1).stores({
       measurements: "++id, date, [type+date]",
       plans: "startDate, status"
@@ -25,6 +27,8 @@ export class Store extends Dexie {
       this.plans = this.table('plans')
       this.prepareData()
     })
+
+    this.open()
   }
 
   // load latest data
@@ -49,6 +53,8 @@ export class Store extends Dexie {
 
     this.plans.clear()
     this.plans.bulkAdd(plans)
+
+    this.on.dataload.fire()
   }
 
   /*
