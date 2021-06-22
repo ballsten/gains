@@ -1,7 +1,7 @@
 <template>
   <div class="card">
     <div class="card-header">
-      <p class="card-header-title">Current Metrics</p>
+      <p class="card-header-title">Metrics</p>
     </div>
     <div class="card-content">
       <table class="table is-fullwidth">

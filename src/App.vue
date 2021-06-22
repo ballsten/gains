@@ -17,13 +17,22 @@
             :type="planMetrics.type"
             :targetBodyFat="planMetrics.targetBodyFat"
             :exercisePerWeek="planMetrics.exercisePerWeek"
-            :bmr="planMetrics.bmr"
-            :tdee="planMetrics.tdee"
-            :targetConsumption="planMetrics.targetConsumption"
+            :changePerWeek="planMetrics.changePerWeek"
+            :estimatedTargetWeight="planMetrics.estimatedTargetWeight"
+            :estimatedEndDate="planMetrics.estimatedEndDate"
           >
           </CurrentPlan>
         </div>
-        <div class="column">placeholder</div>
+        <div class="column">
+          <Nutrition
+            :bmr="nutrition.bmr"
+            :tdee="nutrition.tdee"
+            :targetConsumption="nutrition.targetConsumption"
+            :protein="nutrition.protein"
+            :carbohydrate="nutrition.carbohydrate"
+            :fat="nutrition.fat"
+          ></Nutrition>
+        </div>
       </div>
     </div>
   </div>
@@ -33,12 +42,14 @@
 import { Store } from "./store";
 import CurrentMetrics from "./components/CurrentMetrics.vue";
 import CurrentPlan from "./components/CurrentPlan.vue";
+import Nutrition from "./components/Nutrition.vue";
 
 export default {
   name: "Gains",
   components: {
     CurrentMetrics,
     CurrentPlan,
+    Nutrition,
   },
   data() {
     return {
@@ -56,16 +67,25 @@ export default {
         type: "",
         targetBodyFat: 0,
         exercisePerWeek: 0,
+        changePerWeek: 0,
+        estimatedTargetWeight: 0,
+        estimatedEndDate: "",
+      },
+      nutrition: {
         bmr: 0,
         tdee: 0,
         targetConsumption: 0,
+        protein: 0,
+        carbohydrate: 0,
+        fat: 0,
       },
     };
   },
   async created() {
-    this.store = new Store()
-    await this.calculateMetrics()
-    await this.calculatePlanMetrics()
+    this.store = new Store();
+    await this.calculateMetrics();
+    await this.calculatePlanMetrics();
+    await this.calculateNutrition();
   },
   methods: {
     async calculateMetrics() {
@@ -107,21 +127,58 @@ export default {
       ).toFixed(1);
     },
     async calculatePlanMetrics() {
-      let currentPlan = await this.store.getCurrentPlan()
+      let currentPlan = await this.store.getCurrentPlan();
 
-      this.planMetrics.type = currentPlan.type.charAt(0).toUpperCase() + currentPlan.type.slice(1)
-      this.planMetrics.targetBodyFat = parseFloat(currentPlan.targetBodyFat * 100).toFixed(0)
-      this.planMetrics.exercisePerWeek = currentPlan.exercisePerWeek
+      this.planMetrics.type =
+        currentPlan.type.charAt(0).toUpperCase() + currentPlan.type.slice(1);
+      this.planMetrics.targetBodyFat = parseFloat(
+        currentPlan.targetBodyFat * 100
+      ).toFixed(0);
+      this.planMetrics.exercisePerWeek = currentPlan.exercisePerWeek;
 
-      this.planMetrics.bmr = parseFloat(370 + (21.6 * this.metrics.leanBodyMass) * 4.184).toFixed(0)
+      this.planMetrics.changePerWeek = parseFloat(
+        this.metrics.weight * -0.007
+      ).toFixed(1);
 
-      let tdeeFactor = 1.2
-      if(currentPlan.exercisePerWeek > 3 ) tdeeFactor = 1.35
-      if(currentPlan.exercisePerWeek > 6 ) tdeeFactor = 1.5
+      this.planMetrics.estimatedTargetWeight = parseFloat(
+        this.metrics.leanBodyMass / (1 - this.planMetrics.targetBodyFat / 100)
+      ).toFixed(1);
 
-      this.planMetrics.tdee = parseFloat(this.planMetrics.bmr * tdeeFactor).toFixed(0)
+      let estimatedEndDate = new Date()
+      let lossRequired = this.metrics.weight - this.planMetrics.estimatedTargetWeight
+      let daysRequired = lossRequired / (Math.abs(this.planMetrics.changePerWeek) / 7)
+      estimatedEndDate.setDate(estimatedEndDate.getDate() + daysRequired)
 
-      this.planMetrics.targetConsumption = this.planMetrics.tdee - 500 * 4.184
+      let dft = new Intl.DateTimeFormat("en-GB")
+      
+      this.planMetrics.estimatedEndDate = dft.format(estimatedEndDate)
+    },
+    async calculateNutrition() {
+      this.nutrition.bmr = parseFloat(
+        370 + 21.6 * this.metrics.leanBodyMass * 4.184
+      ).toFixed(0);
+
+      let tdeeFactor = 1.2;
+      if (this.planMetrics.exercisePerWeek > 3) tdeeFactor = 1.35;
+      if (this.planMetrics.exercisePerWeek > 6) tdeeFactor = 1.5;
+
+      this.nutrition.tdee = parseFloat(this.nutrition.bmr * tdeeFactor).toFixed(
+        0
+      );
+
+      this.nutrition.targetConsumption = this.nutrition.tdee - 500 * 4.184;
+
+      if (this.planMetrics.type === "Cut") {
+        this.nutrition.protein = parseFloat(
+          (this.nutrition.targetConsumption * 0.45) / 4.184 / 4
+        ).toFixed(0);
+        this.nutrition.carbohydrate = parseFloat(
+          (this.nutrition.targetConsumption * 0.38) / 4.184 / 4
+        ).toFixed(0);
+        this.nutrition.fat = parseFloat(
+          (this.nutrition.targetConsumption * 0.17) / 4.184 / 9
+        ).toFixed(0);
+      }
     },
   },
 };

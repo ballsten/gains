@@ -1,7 +1,7 @@
 <template>
   <div class="card">
     <div class="card-header">
-      <p class="card-header-title">Current Plan</p>
+      <p class="card-header-title">Phase</p>
     </div>
     <div class="card-content">
       <table class="table is-fullwidth">
@@ -19,16 +19,16 @@
             <td>{{ exercisePerWeek }} hr</td>
           </tr>
           <tr>
-            <td>BMR</td>
-            <td>{{ bmr }} kJ</td>
+            <td>Change per week</td>
+            <td>{{ changePerWeek }} kg</td>
           </tr>
           <tr>
-            <td>TDEE</td>
-            <td>{{ tdee }} kJ</td>
+            <td>Estimated target weight</td>
+            <td>{{ estimatedTargetWeight }} kg</td>
           </tr>
           <tr>
-            <td>Target consumption</td>
-            <td>{{ targetConsumption }} kJ</td>
+            <td>Estimated end date</td>
+            <td>{{ estimatedEndDate }}</td>
           </tr>
         </tbody>
       </table>
@@ -38,6 +38,13 @@
 
 <script>
 export default {
-  props: ["type", "targetBodyFat", "exercisePerWeek", "bmr", "tdee", "targetConsumption"]
-}
+  props: [
+    "type",
+    "targetBodyFat",
+    "exercisePerWeek",
+    "changePerWeek",
+    "estimatedTargetWeight",
+    "estimatedEndDate"
+  ],
+};
 </script>
