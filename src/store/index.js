@@ -66,12 +66,17 @@ export class Store extends Dexie {
     let endDate = new Date(date)
     endDate.setDate(endDate.getDate() + 1)
 
-    const records = await this.measurements
+    let records = await (this.measurements
       .where("[type+date]")
       .between(
         [type, startDate],
         [type, endDate])
-      .toArray()
+      .reverse()
+      .toArray())
+
+    // cut results to the equal the day range. This issue was caused by
+    // the time part of the dates
+    records = records.slice(0, dayRange)
 
     let sum = records.reduce((a, b) => a + b.unit, 0)
     let avg = (sum / records.length) || 0
