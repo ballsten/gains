@@ -24,7 +24,7 @@
           <tr>
             <td>Change per week</td>
             <td>{{ changePerWeek }} kg</td>
-                        <td>
+            <td>
               <span
                 class="icon has-tooltip-arrow"
                 data-tooltip="Weight * -0.007"
@@ -36,7 +36,7 @@
           <tr>
             <td>Estimated target weight</td>
             <td>{{ estimatedTargetWeight }} kg</td>
-                        <td>
+            <td>
               <span
                 class="icon has-tooltip-arrow"
                 data-tooltip="Lean Body Mass / (1 - Target Body Fat)&#10;Assumes Lean Body Mass will remain the same"
@@ -48,7 +48,7 @@
           <tr>
             <td>Estimated end date</td>
             <td>{{ estimatedEndDate }}</td>
-                                    <td>
+            <td>
               <span
                 class="icon has-tooltip-arrow"
                 data-tooltip="Uses Change Per Week to calculate the number of days to hit the Estimated Target Weight"
