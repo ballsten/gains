@@ -6,7 +6,7 @@ export const plans = [
     status: "active",
     type: "cut",
     exercisePerWeek: 7,
-    targetBodyFat: 0.18,
+    targetBodyFat: 0.15,
     comment: "I'm turning 40 soon. Probably should get in shape."
   },
 ]
