@@ -8,7 +8,7 @@
         <tbody>
           <tr>
             <td>BMR</td>
-            <td>{{ bmr }} kJ</td>
+            <td>{{ bmr.toLocaleString(undefined, {maximumFractionDigits: 0}) }} kJ</td>
             <td>
               <span
                 class="icon has-tooltip-arrow"
@@ -20,7 +20,7 @@
           </tr>
           <tr>
             <td>TDEE</td>
-            <td>{{ tdee }} kJ</td>
+            <td>{{ tdee.toLocaleString(undefined, {maximumFractionDigits: 0}) }} kJ</td>
             <td>
               <span
                 class="icon has-tooltip-arrow"
@@ -32,7 +32,7 @@
           </tr>
           <tr>
             <td>Target consumption</td>
-            <td>{{ targetConsumption }} kJ</td>
+            <td>{{ targetConsumption.toLocaleString(undefined, {maximumFractionDigits: 0}) }} kJ</td>
             <td>
               <span
                 class="icon has-tooltip-arrow"
@@ -44,7 +44,7 @@
           </tr>
           <tr>
             <td>Protein</td>
-            <td>{{ protein }} g</td>
+            <td>{{ protein.toLocaleString(undefined, {maximumFractionDigits: 0}) }} g</td>
             <td>
               <span
                 class="icon has-tooltip-arrow"
@@ -56,7 +56,7 @@
           </tr>
           <tr>
             <td>Carbohydrate</td>
-            <td>{{ carbohydrate }} g</td>
+            <td>{{ carbohydrate.toLocaleString(undefined, {maximumFractionDigits: 0}) }} g</td>
             <td>
               <span
                 class="icon has-tooltip-arrow"
@@ -68,7 +68,7 @@
           </tr>
           <tr>
             <td>Fat</td>
-            <td>{{ fat }} g</td>
+            <td>{{ fat.toLocaleString(undefined, {maximumFractionDigits: 0}) }} g</td>
             <td>
               <span
                 class="icon has-tooltip-arrow"

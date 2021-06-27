@@ -23,7 +23,7 @@
           </tr>
           <tr>
             <td>Change per week</td>
-            <td>{{ changePerWeek }} kg</td>
+            <td>{{ changePerWeek.toLocaleString(undefined, {maximumFractionDigits: 1}) }} kg</td>
             <td>
               <span
                 class="icon has-tooltip-arrow"
@@ -35,7 +35,7 @@
           </tr>
           <tr>
             <td>Estimated target weight</td>
-            <td>{{ estimatedTargetWeight }} kg</td>
+            <td>{{ estimatedTargetWeight.toLocaleString(undefined, {maximumFractionDigits: 1}) }} kg</td>
             <td>
               <span
                 class="icon has-tooltip-arrow"

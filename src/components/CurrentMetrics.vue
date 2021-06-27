@@ -13,7 +13,7 @@
           </tr>
           <tr>
             <td>Weight</td>
-            <td>{{ weight }} kg</td>
+            <td>{{ weight.toLocaleString(undefined, {maximumFractionDigits: 1}) }} kg</td>
             <td>
               <span
                 class="icon has-tooltip-arrow"
@@ -25,12 +25,12 @@
           </tr>
           <tr>
             <td>Height</td>
-            <td>{{ height }} cm</td>
+            <td>{{ height.toLocaleString(undefined, {maximumFractionDigits: 0}) }} cm</td>
             <td></td>
           </tr>
           <tr>
             <td>Body Fat</td>
-            <td>{{ bodyFat }}%</td>
+            <td>{{ bodyFat.toLocaleString(undefined, {maximumFractionDigits: 1}) }}%</td>
             <td>
               <span
                 class="icon has-tooltip-arrow"
@@ -42,7 +42,7 @@
           </tr>
           <tr>
             <td>Lean Body Mass</td>
-            <td>{{ leanBodyMass }} kg</td>
+            <td>{{ leanBodyMass.toLocaleString(undefined, {maximumFractionDigits: 1}) }} kg</td>
             <td>
               <span
                 class="icon has-tooltip-arrow"
@@ -54,7 +54,7 @@
           </tr>
           <tr>
             <td>BMI</td>
-            <td>{{ bodyMassIndex }}%</td>
+            <td>{{ bodyMassIndex.toLocaleString(undefined, {maximumFractionDigits: 1}) }}%</td>
             <td>
               <span
                 class="icon has-tooltip-arrow"

@@ -91,97 +91,56 @@ export default {
   },
   methods: {
     async calculateMetrics() {
-      let dob = await this.store.getCurrent("birthday");
-      let diff = Date.now() - dob.getTime();
-      let ageDate = new Date(diff);
+      let dob = await this.store.getCurrent("birthday")
+      let diff = Date.now() - dob.getTime()
+      let ageDate = new Date(diff)
 
-      this.metrics.age = Math.abs(ageDate.getUTCFullYear() - 1970);
+      this.metrics.age = Math.abs(ageDate.getUTCFullYear() - 1970)
 
-      this.metrics.weight = parseFloat(
-        await this.store.getCurrent("weight")
-      ).toFixed(1);
-      this.metrics.height = parseFloat(
-        await this.store.getCurrent("height")
-      ).toFixed(0);
-      this.metrics.neck = parseFloat(
-        await this.store.getCurrent("neck")
-      ).toFixed(2);
-      this.metrics.waist = parseFloat(
-        await this.store.getCurrent("waist")
-      ).toFixed(2);
+      this.metrics.weight = await this.store.getCurrent("weight")
+      this.metrics.height = await this.store.getCurrent("height")
+      this.metrics.neck = await this.store.getCurrent("neck")
+      this.metrics.waist = await this.store.getCurrent("waist")
 
       // calculate body fat using US navy formula
       // https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6650177
 
-      this.metrics.bodyFat = parseFloat(
-        86.01 *
-          Math.log10((this.metrics.waist - this.metrics.neck) * 0.393701) -
-          70.041 * Math.log10(this.metrics.height * 0.393701) +
-          36.76
-      ).toFixed(1);
-      this.metrics.leanBodyMass = parseFloat(
-        this.metrics.weight * (1 - this.metrics.bodyFat / 100)
-      ).toFixed(1);
-      this.metrics.bodyMassIndex = parseFloat(
-        (this.metrics.weight /
-          ((this.metrics.height * this.metrics.height) / 100)) *
-          100
-      ).toFixed(1);
+      this.metrics.bodyFat = 86.01 * Math.log10((this.metrics.waist - this.metrics.neck) * 0.393701) - 70.041 * Math.log10(this.metrics.height * 0.393701) + 36.76
+      this.metrics.leanBodyMass =  this.metrics.weight * (1 - this.metrics.bodyFat / 100)
+      this.metrics.bodyMassIndex = this.metrics.weight /  ((this.metrics.height * this.metrics.height) / 100) * 100
     },
     async calculatePlanMetrics() {
-      let currentPlan = await this.store.getCurrentPlan();
+      let currentPlan = await this.store.getCurrentPlan()
 
-      this.planMetrics.type =
-        currentPlan.type.charAt(0).toUpperCase() + currentPlan.type.slice(1);
-      this.planMetrics.targetBodyFat = parseFloat(
-        currentPlan.targetBodyFat * 100
-      ).toFixed(0);
-      this.planMetrics.exercisePerWeek = currentPlan.exercisePerWeek;
+      this.planMetrics.type = currentPlan.type.charAt(0).toUpperCase() + currentPlan.type.slice(1)
+      this.planMetrics.targetBodyFat = currentPlan.targetBodyFat * 100
+      this.planMetrics.exercisePerWeek = currentPlan.exercisePerWeek
 
-      this.planMetrics.changePerWeek = parseFloat(
-        this.metrics.weight * -0.007
-      ).toFixed(1);
+      this.planMetrics.changePerWeek = this.metrics.weight * -0.007
 
-      this.planMetrics.estimatedTargetWeight = parseFloat(
-        this.metrics.leanBodyMass / (1 - this.planMetrics.targetBodyFat / 100)
-      ).toFixed(1);
+      this.planMetrics.estimatedTargetWeight = this.metrics.leanBodyMass / (1 - this.planMetrics.targetBodyFat / 100)
 
-      let estimatedEndDate = new Date();
-      let lossRequired =
-        this.metrics.weight - this.planMetrics.estimatedTargetWeight;
-      let daysRequired =
-        lossRequired / (Math.abs(this.planMetrics.changePerWeek) / 7);
-      estimatedEndDate.setDate(estimatedEndDate.getDate() + daysRequired);
-
-      let dft = new Intl.DateTimeFormat("en-GB");
-
-      this.planMetrics.estimatedEndDate = dft.format(estimatedEndDate);
+      let estimatedEndDate = new Date()
+      let lossRequired = this.metrics.weight - this.planMetrics.estimatedTargetWeight
+      let daysRequired = lossRequired / (Math.abs(this.planMetrics.changePerWeek) / 7)
+      estimatedEndDate.setDate(estimatedEndDate.getDate() + daysRequired)
+      this.planMetrics.estimatedEndDate = new Intl.DateTimeFormat("en-GB").format(estimatedEndDate);
     },
     async calculateNutrition() {
-      this.nutrition.bmr = parseFloat(
-        370 + 21.6 * this.metrics.leanBodyMass * 4.184
-      ).toFixed(0);
+      this.nutrition.bmr = (370 + 21.6 * this.metrics.leanBodyMass) * 4.184
 
-      let tdeeFactor = 1.2;
-      if (this.planMetrics.exercisePerWeek > 3) tdeeFactor = 1.35;
-      if (this.planMetrics.exercisePerWeek > 6) tdeeFactor = 1.5;
+      let tdeeFactor = 1.2
+      if (this.planMetrics.exercisePerWeek > 3) tdeeFactor = 1.35
+      if (this.planMetrics.exercisePerWeek > 6) tdeeFactor = 1.5
 
-      this.nutrition.tdee = parseFloat(this.nutrition.bmr * tdeeFactor).toFixed(
-        0
-      );
+      this.nutrition.tdee = this.nutrition.bmr * tdeeFactor
 
-      this.nutrition.targetConsumption = this.nutrition.tdee - 500 * 4.184;
+      this.nutrition.targetConsumption = this.nutrition.tdee - (500 * 4.184)
 
       if (this.planMetrics.type === "Cut") {
-        this.nutrition.protein = parseFloat(
-          (this.nutrition.targetConsumption * 0.45) / 4.184 / 4
-        ).toFixed(0);
-        this.nutrition.carbohydrate = parseFloat(
-          (this.nutrition.targetConsumption * 0.38) / 4.184 / 4
-        ).toFixed(0);
-        this.nutrition.fat = parseFloat(
-          (this.nutrition.targetConsumption * 0.17) / 4.184 / 9
-        ).toFixed(0);
+        this.nutrition.protein = this.nutrition.targetConsumption * 0.45 / 4.184 / 4
+        this.nutrition.carbohydrate = this.nutrition.targetConsumption * 0.38 / 4.184 / 4
+        this.nutrition.fat = this.nutrition.targetConsumption * 0.17 / 4.184 / 9
       }
     },
   },
