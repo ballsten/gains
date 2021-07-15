@@ -103,19 +103,19 @@ export const measurements = {
     {
       date: new Date("2021-07-06"),
       weight: 86.8,
-      neck: 38.0,
+      neck: 37.9,
       waist: 93.4
     },
     {
       date: new Date("2021-07-07"),
       weight: 86.5,
-      neck: 38.0,
+      neck: 37.9,
       waist: 93.0
     },
     {
       date: new Date("2021-07-08"),
       weight: 87.0,
-      neck: 38.0,
+      neck: 37.9,
       waist: 93.2
     },
     {
@@ -129,7 +129,7 @@ export const measurements = {
     {
       date: new Date("2021-07-11"),
       weight: 86.6,
-      neck: 38.0,
+      neck: 37.8,
       waist: 93.0
     },
     {
@@ -139,7 +139,7 @@ export const measurements = {
     {
       date: new Date("2021-07-13"),
       weight: 86.5,
-      neck: 38.0,
+      neck: 37.8,
       waist: 92.0
     },
     {
@@ -149,7 +149,7 @@ export const measurements = {
     {
       date: new Date("2021-07-15"),
       weight: 86.0,
-      neck: 38.0,
+      neck: 37.7,
       waist: 91.2
     },
     {
