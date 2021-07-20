@@ -12,6 +12,9 @@ import { plans } from './plans'
 const AVERAGE_PERIOD_DAYS = 3
 
 export class Store extends Dexie {
+
+  updatedDate
+
   constructor() {
     super('gains')
 
@@ -53,6 +56,8 @@ export class Store extends Dexie {
 
     this.plans.clear()
     this.plans.bulkAdd(plans)
+
+    this.updatedDate = latest.date
 
     this.on.dataload.fire()
   }
