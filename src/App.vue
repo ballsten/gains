@@ -39,7 +39,7 @@
   <div class="section">
     <div class="content ml-4">
       <p class="has-text-grey">
-        <i>Updated on: {{ updateDate }}</i>
+        <i>Updated on: {{ updatedDate }}</i>
       </p>
     </div>
   </div>
@@ -86,7 +86,7 @@ export default {
         carbohydrate: 0,
         fat: 0,
       },
-      updateDate: new Date(),
+      updatedDate: ""
     };
   },
   async created() {
@@ -96,8 +96,8 @@ export default {
       await this.calculatePlanMetrics();
       await this.calculateNutrition();
 
-      this.updateDate = new Intl.DateTimeFormat("en-GB").format(
-        this.store.updateDate
+      this.updatedDate = new Intl.DateTimeFormat("en-GB").format(
+        this.store.updatedDate
       );
     });
   },
