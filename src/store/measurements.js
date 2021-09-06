@@ -440,5 +440,9 @@ export const measurements = {
       date: new Date("2021-09-06"),
       weight: 82.6,
     },
+    {
+      date: new Date("2021-09-07"),
+      weight: 82.6,
+    },
   ]
 }
