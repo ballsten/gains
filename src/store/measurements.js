@@ -449,12 +449,16 @@ export const measurements = {
       weight: 83.7,
     },
     {
-      date: new Date("2021-09-09"),
+      date: new Date("2021-09-10"),
       weight: 82.4,
     },
     {
-      date: new Date("2021-09-09"),
+      date: new Date("2021-09-11"),
       weight: 82.8,
+    },
+    {
+      date: new Date("2021-09-13"),
+      weight: 83.5,
     },
   ]
 }
