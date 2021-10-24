@@ -17,5 +17,13 @@ export const plans = [
     targetBodyFat: 0.18,
     comment: "On pause until lockdown is over"
   },
+  {
+    startDate: new Date("2021-10-25"),
+    status: "active",
+    type: "cut",
+    exercisePerWeek: 6,
+    targetBodyFat: 0.15,
+    comment: "Back on it - run COVID gauntlet at the gym"
+  },
 ]
   
