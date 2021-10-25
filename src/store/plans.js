@@ -11,7 +11,7 @@ export const plans = [
   },
   {
     startDate: new Date("2021-09-02"),
-    status: "active",
+    status: "complete",
     type: "maintenance",
     exercisePerWeek: 6,
     targetBodyFat: 0.18,
@@ -22,7 +22,7 @@ export const plans = [
     status: "active",
     type: "cut",
     exercisePerWeek: 6,
-    targetBodyFat: 0.15,
+    targetBodyFat: 0.12,
     comment: "Back on it - run COVID gauntlet at the gym"
   },
 ]
