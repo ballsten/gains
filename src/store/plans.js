@@ -19,11 +19,19 @@ export const plans = [
   },
   {
     startDate: new Date("2021-10-25"),
+    status: "complete",
+    type: "cut",
+    exercisePerWeek: 6,
+    targetBodyFat: 0.12,
+    comment: "Back on it - run COVID gauntlet at the gym - FAILED"
+  },
+  {
+    startDate: new Date("2021-11-15"),
     status: "active",
     type: "cut",
     exercisePerWeek: 6,
     targetBodyFat: 0.12,
-    comment: "Back on it - run COVID gauntlet at the gym"
+    comment: "restarting after failed attempt"
   },
 ]
   
