@@ -42,11 +42,11 @@ export const plans = [
     comment: "restarting after failed attempt"
   },
   {
-    startDate: new Date("2022-01-17"),
+    startDate: new Date("2022-03-11"),
     status: "active",
     type: "cut",
     exercisePerWeek: 6,
-    targetBodyFat: 0.10,
+    targetBodyFat: 0.1,
     comment: "restarting after failed yet another attempt"
   },
 ]
