@@ -43,11 +43,19 @@ export const plans = [
   },
   {
     startDate: new Date("2022-03-11"),
-    status: "active",
+    status: "complete",
     type: "cut",
     exercisePerWeek: 6,
     targetBodyFat: 0.1,
     comment: "restarting after failed yet another attempt"
+  },
+  {
+    startDate: new Date("2022-04-25"),
+    status: "active",
+    type: "cut",
+    exercisePerWeek: 6,
+    targetBodyFat: 0.1,
+    comment: "wedding cut, starting after teeth out"
   },
 ]
   
