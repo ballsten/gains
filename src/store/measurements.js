@@ -567,5 +567,11 @@ export const measurements = {
       neck: 38.4,
       waist: 93.0,
     },
+    {
+      date: new Date("2022-04-26"),
+      weight: 86.2,
+      neck: 38.0,
+      waist: 93.5,
+    },
   ]
 }
