@@ -53,7 +53,7 @@ export const plans = [
     startDate: new Date("2022-04-25"),
     status: "active",
     type: "cut",
-    exercisePerWeek: 6,
+    exercisePerWeek: 3,
     targetBodyFat: 0.1,
     comment: "wedding cut, starting after teeth out"
   },
